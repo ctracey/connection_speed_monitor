@@ -19,7 +19,7 @@ gnuplot << eor
  set key outside horizontal bmargin textcolor rgbcolor "white"
  set border linecolor rgbcolor "white"
  set ylabel "Mbps" textcolor rgbcolor "white"
-# set xlabel "timestamp" textcolor rgbcolor "white"
+ set xlabel "timestamp" textcolor rgbcolor "black"
 
  set datafile separator ","
 
