@@ -1,15 +1,18 @@
 #!/bin/bash
 
-timestamp=$(date '+%Y%m')
-csv_file="log/speed_$timestamp.csv"
-mkdir -p 'log'
+relative_path=$(dirname ${BASH_SOURCE})
 
-./bin/speedtest_cli.py | grep -E "(Download|Upload)" | tr '\n' ' ' | awk -v date=$(date '+%Y%m%d%H%M') '{print date "," $2 "," $5}' >> $csv_file
+output_path=$1
+mkdir -p $output_path
+
+timestamp=$(date '+%Y%m')
+csv_file="$output_path/speed_$timestamp.csv"
+
+$relative_path/speedtest_cli.py | grep -E "(Download|Upload)" | tr '\n' ' ' | awk -v date=$(date '+%Y%m%d%H%M') '{print date "," $2 "," $5}' >> $csv_file
 #cat ./test.log | grep -E "(Download|Upload)" | tr '\n' ' ' | awk -v date=$(date '+%Y%m%d%H%M') '{print date "," $2 "," $5}' >> $csv_file
 
 gnuplot << eor
-
- set output 'connection_speed_$timestamp.png'
+ set output '$output_path/connection_speed_$timestamp.png'
 
  set terminal png size 900, 300
  set obj 1 rectangle behind from screen 0,0 to screen 1,1
@@ -30,8 +33,4 @@ gnuplot << eor
  set style line 2 lc rgb "green"
 
  plot "$csv_file" using 1:2 with line title "download" ls 1, "$csv_file" using 1:3 with line title "upload" ls 2
-
 eor
-
-#  set boxwidth 0.5
-#  set style fill solid
