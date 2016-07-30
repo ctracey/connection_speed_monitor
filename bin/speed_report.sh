@@ -25,6 +25,7 @@ gnuplot << eor
 
  set xdata time
  set timefmt "%Y%m%d%H%M"
+ set yrange [0:*]
 
  set style line 1 lc rgb "blue"
  set style line 2 lc rgb "green"
