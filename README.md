@@ -23,6 +23,6 @@ To generate graph from csv log
 
 ## Scheduling
 
-Up to you to schedule this to run in your own way
+Up to you to schedule this to run in your own way.
 This might help http://www.splinter.com.au/using-launchd-to-run-a-script-every-5-mins-on/
 
